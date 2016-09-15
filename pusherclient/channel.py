@@ -6,7 +6,7 @@ class Channel(object):
 
         self.event_callbacks = {}
 
-    def bind(self, event_name, callback):
+    def bind(self, event_name, callback, kwargs=None):
         """Bind an event to a callback
 
         :param event_name: The name of the event to bind to.
@@ -17,10 +17,11 @@ class Channel(object):
         if event_name not in self.event_callbacks.keys():
             self.event_callbacks[event_name] = []
 
-        self.event_callbacks[event_name].append(callback)
+        self.event_callbacks[event_name].append({"func": callback,
+                                                 "kwargs": kwargs})
 
     def trigger(self, event_name, data):
-        """Trigger an event on this channel.  Only available for private or 
+        """Trigger an event on this channel.  Only available for private or
         presence channels
 
         :param event_name: The name of the event.  Must begin with 'client-''
@@ -36,4 +37,4 @@ class Channel(object):
     def _handle_event(self, event_name, data):
         if event_name in self.event_callbacks.keys():
             for callback in self.event_callbacks[event_name]:
-                callback(data)
+                callback["func"](data, **callback["kwargs"])
