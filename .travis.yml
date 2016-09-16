@@ -1,6 +1,8 @@
 language: python
 python:
-  - "2.6"
+  # Disable testing 2.6 since twisted has Python 2.7 or higher as a dependency.
+  # https://twistedmatrix.com/pipermail/twisted-python/2015-March/029270.html
+#  - "2.6"
   - "2.7"
   # Disable testing 3.2 since autobahn uses unicode literal syntax that wasn't
   # re-added into 3.3.  See PEP 414
