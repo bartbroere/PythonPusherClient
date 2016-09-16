@@ -59,7 +59,7 @@ class Connection(Thread):
         Thread.__init__(self)
         self.daemon = daemon
 
-    def bind(self, event_name, callback, kwargs=None):
+    def bind(self, event_name, callback, kwargs={}):
         """Bind an event to a callback
 
         :param event_name: The name of the event to bind to.
