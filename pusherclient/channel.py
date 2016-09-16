@@ -13,6 +13,9 @@ class Channel(object):
         :type event_name: str
 
         :param callback: The callback to notify of this event.
+
+        :param kwargs: The keyword arguments to pass to the callback.
+        :type kwargs: dict
         """
         if event_name not in self.event_callbacks.keys():
             self.event_callbacks[event_name] = []
