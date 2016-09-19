@@ -1,3 +1,8 @@
+try:
+    import simplejson as json
+except ImportError:
+    import json
+
 class Channel(object):
     def __init__(self, channel_name, connection):
         self.name = channel_name
@@ -6,7 +11,7 @@ class Channel(object):
 
         self.event_callbacks = {}
 
-    def bind(self, event_name, callback, kwargs={}):
+    def bind(self, event_name, callback, kwargs={}, decode_json=False):
         """Bind an event to a callback
 
         :param event_name: The name of the event to bind to.
@@ -21,7 +26,8 @@ class Channel(object):
             self.event_callbacks[event_name] = []
 
         self.event_callbacks[event_name].append({"func": callback,
-                                                 "kwargs": kwargs})
+                                                 "kwargs": kwargs,
+                                                 "decode_json": decode_json})
 
     def trigger(self, event_name, data):
         """Trigger an event on this channel.  Only available for private or
@@ -40,4 +46,7 @@ class Channel(object):
     def _handle_event(self, event_name, data):
         if event_name in self.event_callbacks.keys():
             for callback in self.event_callbacks[event_name]:
-                callback["func"](data, **callback["kwargs"])
+                if callback["decode_json"]:
+                    callback["func"](json.loads(data), **callback["kwargs"])
+                else:
+                    callback["func"](data, **callback["kwargs"])

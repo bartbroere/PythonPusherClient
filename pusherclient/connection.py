@@ -59,7 +59,9 @@ class Connection(Thread):
         Thread.__init__(self)
         self.daemon = daemon
 
-    def bind(self, event_name, callback, kwargs={}):
+    #TODO add an option to decode json of the message, to make implementations
+    #more DRY
+    def bind(self, event_name, callback, kwargs={}, decode_json=False):
         """Bind an event to a callback
 
         :param event_name: The name of the event to bind to.
@@ -75,7 +77,8 @@ class Connection(Thread):
             self.event_callbacks[event_name] = []
 
         self.event_callbacks[event_name].append({"func": callback,
-                                                 "kwargs": kwargs})
+                                                 "kwargs": kwargs,
+                                                 "decode_json": decode_json})
 
     def disconnect(self):
         self.needs_reconnect = False
@@ -149,8 +152,12 @@ class Connection(Thread):
                 if params['event'] in self.event_callbacks.keys():
                     for callback in self.event_callbacks[params['event']]:
                         try:
-                            callback["func"](params['data'],
-                                             **callback["kwargs"])
+                            if callback["decode_json"]:
+                                callback["func"](json.loads(params['data']),
+                                                 **callback["kwargs"])
+                            else:
+                                callback["func"](params['data'],
+                                                 **callback["kwargs"])
                         except Exception:
                             self.logger.exception("Callback raised unhandled")
                 else:
