@@ -21,6 +21,10 @@ class Channel(object):
 
         :param kwargs: The keyword arguments to pass to the callback.
         :type kwargs: dict
+
+        :param decode_json: Boolean that determines whether json messages will
+                            be sent to the callback in decoded form
+        :type decode_json: boolean
         """
         if event_name not in self.event_callbacks.keys():
             self.event_callbacks[event_name] = []
