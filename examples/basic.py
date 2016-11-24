@@ -5,7 +5,7 @@ sys.path.append('..')
 
 import time
 
-import pusherclient
+import pusherclientb
 
 # Add a logging handler so we can see the raw communication data
 import logging
@@ -35,7 +35,7 @@ if __name__ == '__main__':
 
     appkey = sys.argv[1]
 
-    pusher = pusherclient.Pusher(appkey)
+    pusher = pusherclientb.Pusher(appkey)
 
     pusher.connection.bind('pusher:connection_established', connect_handler)
     pusher.connect()
