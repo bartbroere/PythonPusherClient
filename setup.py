@@ -1,6 +1,6 @@
 from setuptools import setup
 
-VERSION = "0.3.0"
+VERSION = "0.3.1"
 
 requirements = ["websocket-client"]
 
@@ -9,17 +9,17 @@ def readme():
         return f.read()
 
 setup(
-    name="pusherclient",
+    name="pusherclientb",
     version=VERSION,
     description="Pusher websocket client for python",
     long_description=readme(),
     keywords="pusher websocket client",
-    author="Erik Kulyk",
-    author_email="e.kulyk@gmail.com",
+    author="Bart Broere",
+    author_email="mail@bartbroere.eu",
     license="MIT",
-    url="https://github.com/ekulyk/PythonPusherClient",
+    url="https://github.com/bartbroere/PythonPusherClient",
     install_requires=requirements,
-    packages=["pusherclient"],
+    packages=["pusherclientb"],
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Environment :: Web Environment',

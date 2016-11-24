@@ -5,7 +5,7 @@ sys.path.append('..')
 
 import time
 
-import pusherclient
+import pusherclientb
 
 global pusher
 
@@ -29,7 +29,7 @@ if __name__ == '__main__':
     appkey = sys.argv[1]
     secret = sys.argv[2]
 
-    pusher = pusherclient.Pusher(appkey, secret=secret)
+    pusher = pusherclientb.Pusher(appkey, secret=secret)
 
     pusher.connection.bind('pusher:connection_established', connect_handler)
     pusher.connect()
