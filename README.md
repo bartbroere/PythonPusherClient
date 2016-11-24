@@ -1,9 +1,9 @@
-[![Build Status](https://travis-ci.org/bartbroere/PythonPusherClient.svg?branch=master)](https://travis-ci.org/bartbroere/PythonPusherClient)
+[![Build Status](https://travis-ci.org/ekulyk/PythonPusherClient.svg?branch=master)](https://travis-ci.org/ekulyk/PythonPusherClient)
 
-pusherclientb
+pusherclient
 =============
 
-pusherclientb is a python module for handling pusher websockets. This is a branched off version of the original (pusherclient) by Erik Kulyk. It is fully backwards compatible, and in addition provides decoded messages and custom arguments in the callback.
+pusherclient is a python module for handling pusher websockets
 
 Installation
 ------------
@@ -60,5 +60,5 @@ The ruby gem by Logan Koester which provides a similar service was also very hel
 Copyright
 ---------
 
-MIT License - See LICENSE for details.
+MTI License - See LICENSE for details.
 
